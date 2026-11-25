@@ -14,6 +14,15 @@ Features
 - Built with pure Android framework APIs (Java, zero external libraries) — resulting APK is ~13 KB.
 - Includes QUERY_ALL_PACKAGES and launcher <queries> support so installed apps are visible on Android 11+.
 
+How it works
+------------
+- Basic UI (activity_main.xml): Uses standard Theme.DeviceDefault.Light with a plain prompt label, single-line EditText, OK Button, and status TextView for error feedback.
+- App Matching & Launching (MainActivity.java):
+  1. Clicking OK (or pressing Go/Done/Enter on the keyboard) queries launchable apps via PackageManager.queryIntentActivities (ACTION_MAIN + CATEGORY_LAUNCHER).
+  2. Matches the typed text case-insensitively in priority order: exact app label → exact package name → label starts with query → label contains query (picking the shortest matching label).
+  3.Launches the matched app's component (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_RESET_TASK_IF_NEEDED), falling back to getLaunchIntentForPackage if needed, and displays a message if no app matches or it cannot be opened.
+- Android 11+ App Visibility (AndroidManifest.xml): Declares android.permission.QUERY_ALL_PACKAGES and a <queries> launcher intent filter so installed apps remain discoverable on Android 11 and newer.
+
 Requirements
 ------------
 - Android 7.0 (API 24) or higher
@@ -32,8 +41,17 @@ Building from Source
 3. The APK will be generated at:
    app/build/outputs/apk/debug/app-debug.apk
 
+Verification
+------------
+- Built cleanly with Gradle 8.12 (assembleDebug: BUILD SUCCESSFUL, 32 actionable tasks).
+- Verified APK signature (apksigner verify --verbose: Verifies, v2 scheme) and manifest metadata (aapt2 dump badging: package: name='com.example.writetoopen', minSdkVersion:'24', targetSdkVersion:'34', QUERY_ALL_PACKAGES).
+
 Permissions
 -----------
 - QUERY_ALL_PACKAGES: Required on Android 11+ so the app can look up the names of installed launchable apps when you search for them. No internet permission is requested or used.
 
+Autors
+------
+- cotyrobayeszz (@brvnocreations)
+- Gemini 4 Hydrogen in Antigravity
 

@@ -1,5 +1,4 @@
 # WriteToOpen
-===========
 
 A minimal, no-frills Android app launcher where you type an app's name, tap OK, and open it immediately.
 

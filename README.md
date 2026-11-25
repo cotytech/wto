@@ -36,4 +36,4 @@ Permissions
 -----------
 - QUERY_ALL_PACKAGES: Required on Android 11+ so the app can look up the names of installed launchable apps when you search for them. No internet permission is requested or used.
 
-An app launcher, where you type instead of clicking. 
+

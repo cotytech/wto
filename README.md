@@ -18,9 +18,9 @@ How it works
 ------------
 - Basic UI (activity_main.xml): Uses standard Theme.DeviceDefault.Light with a plain prompt label, single-line EditText, OK Button, and status TextView for error feedback.
 - App Matching & Launching (MainActivity.java):
-  1. Clicking OK (or pressing Go/Done/Enter on the keyboard) queries launchable apps via PackageManager.queryIntentActivities (ACTION_MAIN + CATEGORY_LAUNCHER).
-  2. Matches the typed text case-insensitively in priority order: exact app label → exact package name → label starts with query → label contains query (shortest matching label).
-  3.Launches the matched app's component (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_RESET_TASK_IF_NEEDED), falling back to getLaunchIntentForPackage if needed, and displays a message if no app matches or it cannot be opened.
+  i. Clicking OK (or pressing Go/Done/Enter on the keyboard) queries launchable apps via PackageManager.queryIntentActivities (ACTION_MAIN + CATEGORY_LAUNCHER).
+  ii. Matches the typed text case-insensitively in priority order: exact app label → exact package name → label starts with query → label contains query (shortest matching label).
+  iii.Launches the matched app's component (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_RESET_TASK_IF_NEEDED), falling back to getLaunchIntentForPackage if needed, and displays a message if no app matches or it cannot be opened.
 - Android 11+ App Visibility (AndroidManifest.xml): Declares android.permission.QUERY_ALL_PACKAGES and a <queries> launcher intent filter so installed apps remain discoverable on Android 11 and newer.
 
 Requirements
